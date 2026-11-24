@@ -189,9 +189,10 @@ export async function POST(
     return NextResponse.json({ error: "Quiz phải có chính xác 5 câu hỏi." }, { status: 422 });
   }
 
+  const submittedAnswers = parsed.data.answers;
   let correctCount = 0;
   const feedback: QuizQuestionFeedback[] = questions.map((q) => {
-    const selectedOptionId = parsed.data.answers[q.id] ?? null;
+    const selectedOptionId = submittedAnswers[q.id] ?? null;
     const options = (q.quiz_options as Array<{ id: string; option_label: "A" | "B" | "C" | "D"; is_correct: boolean }>) || [];
     const correctOption = options.find((o) => o.is_correct);
     const isCorrect = Boolean(correctOption && selectedOptionId === correctOption.id);
