@@ -44,7 +44,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (isAuthRoute && user) {
+  if (isAuthRoute && user && !request.nextUrl.searchParams.has("error")) {
     const dashUrl = request.nextUrl.clone();
     dashUrl.pathname = "/dashboard";
     return NextResponse.redirect(dashUrl);

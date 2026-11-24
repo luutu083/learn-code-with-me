@@ -11,11 +11,13 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/dashboard";
+  const urlError = searchParams.get("error");
+  const urlDetail = searchParams.get("detail");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(urlError ? `Lỗi tải hồ sơ (${urlError}): ${urlDetail || "Vui lòng kiểm tra cấu hình Supabase"}` : null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
