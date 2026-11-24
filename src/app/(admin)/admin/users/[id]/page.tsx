@@ -10,10 +10,10 @@ import { formatDuration, formatRelativeDate } from "@/lib/utils";
 export default async function AdminUserDetailPage({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }) {
   await requireAdmin();
-  const { id } = await params;
+  const { id } = params;
   const db = createServiceRoleClient();
 
   const { data: userProfile } = await db.from("profiles").select("*").eq("id", id).single();

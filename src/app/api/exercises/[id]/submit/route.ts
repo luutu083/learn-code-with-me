@@ -26,7 +26,7 @@ const requestSchema = z.discriminatedUnion("type", [codingSubmitSchema, quizSubm
  */
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   const auth = await getApiAuth();
   if (!auth) {
@@ -41,7 +41,7 @@ export async function POST(
     );
   }
 
-  const { id: exerciseId } = await params;
+  const { id: exerciseId } = params;
   const body = await request.json().catch(() => null);
   const parsed = requestSchema.safeParse(body);
   if (!parsed.success) {

@@ -8,10 +8,10 @@ import { formatDuration, formatRelativeDate } from "@/lib/utils";
 export default async function AdminUsersPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: { q?: string };
 }) {
   await requireAdmin();
-  const { q } = await searchParams;
+  const { q } = searchParams;
   const query = (q || "").trim().toLowerCase();
 
   const db = createServiceRoleClient();

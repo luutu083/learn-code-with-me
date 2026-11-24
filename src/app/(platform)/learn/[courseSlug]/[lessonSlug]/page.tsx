@@ -18,10 +18,10 @@ import type { PublicExercise, PublicQuizQuestion, PublicTestCase } from "@/types
 export default async function LearnLessonPage({
   params,
 }: {
-  params: Promise<{ courseSlug: string; lessonSlug: string }>;
+  params: { courseSlug: string; lessonSlug: string };
 }) {
   const { user, profile } = await requireAuth();
-  const { courseSlug, lessonSlug } = await params;
+  const { courseSlug, lessonSlug } = params;
   const supabase = await createServerSupabaseClient();
 
   const { data: course } = await supabase

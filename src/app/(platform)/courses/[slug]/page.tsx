@@ -9,10 +9,10 @@ import { Progress } from "@/components/ui/progress";
 export default async function CoursePage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
   const { user, profile } = await requireAuth();
-  const { slug } = await params;
+  const { slug } = params;
   const supabase = await createServerSupabaseClient();
 
   const { data: course } = await supabase
